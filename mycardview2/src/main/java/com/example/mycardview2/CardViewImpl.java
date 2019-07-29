@@ -25,7 +25,8 @@ import androidx.annotation.Nullable;
  */
 interface CardViewImpl {
     void initialize(CardViewDelegate cardView, Context context, ColorStateList backgroundColor,
-                    float radius, float elevation, float maxElevation);
+                    float radius, float elevation, float maxElevation,
+                    ColorStateList shadowColorStart, ColorStateList shadowColorEnd);
 
     void setRadius(CardViewDelegate cardView, float radius);
 

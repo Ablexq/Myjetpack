@@ -44,11 +44,11 @@ class RoundRectDrawableWithShadow extends Drawable {
     private final int mInsetShadow; // extra shadow to avoid gaps between card and shadow
 
     /*
-    * This helper is set by CardView implementations.
-    * <p>
-    * Prior to API 17, canvas.drawRoundRect is expensive; which is why we need this interface
-    * to draw efficient rounded rectangles before 17.
-    * */
+     * This helper is set by CardView implementations.
+     * <p>
+     * Prior to API 17, canvas.drawRoundRect is expensive; which is why we need this interface
+     * to draw efficient rounded rectangles before 17.
+     * */
     static RoundRectHelper sRoundRectHelper;
 
     private Paint mPaint;
@@ -76,9 +76,10 @@ class RoundRectDrawableWithShadow extends Drawable {
 
     private boolean mDirty = true;
 
-    private final int mShadowStartColor;
+    // 阴影颜色默认是 int 类型的颜色值，要修改成 ColorStateList
+    private final ColorStateList mShadowStartColor;
 
-    private final int mShadowEndColor;
+    private final ColorStateList mShadowEndColor;
 
     private boolean mAddPaddingForCorners = true;
 
@@ -87,10 +88,25 @@ class RoundRectDrawableWithShadow extends Drawable {
      */
     private boolean mPrintedShadowClipWarning = false;
 
-    RoundRectDrawableWithShadow(Resources resources, ColorStateList backgroundColor, float radius,
-            float shadowSize, float maxShadowSize) {
-        mShadowStartColor = resources.getColor(R.color.cardview_shadow_start_color);
-        mShadowEndColor = resources.getColor(R.color.cardview_shadow_end_color);
+    RoundRectDrawableWithShadow(Resources resources,
+                                ColorStateList backgroundColor,
+                                float radius,
+                                float shadowSize,
+                                float maxShadowSize,
+                                ColorStateList shadowColorStart,
+                                ColorStateList shadowColorEnd) {
+        // 如果没有设置阴影颜色，使用默认颜色
+        if (shadowColorStart == null) {
+            mShadowStartColor = ColorStateList.valueOf(resources.getColor(R.color.cardview_shadow_start_color));
+        } else {
+            mShadowStartColor = shadowColorStart;
+        }
+        if (shadowColorEnd == null) {
+            mShadowEndColor = ColorStateList.valueOf(resources.getColor(R.color.cardview_shadow_end_color));
+        } else {
+            mShadowEndColor = shadowColorEnd;
+        }
+
         mInsetShadow = resources.getDimensionPixelSize(R.dimen.cardview_compat_inset_shadow);
         mPaint = new Paint(Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG);
         setBackground(backgroundColor);
@@ -104,7 +120,7 @@ class RoundRectDrawableWithShadow extends Drawable {
     }
 
     private void setBackground(ColorStateList color) {
-        mBackground = (color == null) ?  ColorStateList.valueOf(Color.TRANSPARENT) : color;
+        mBackground = (color == null) ? ColorStateList.valueOf(Color.TRANSPARENT) : color;
         mPaint.setColor(mBackground.getColorForState(getState(), mBackground.getDefaultColor()));
     }
 
@@ -175,7 +191,7 @@ class RoundRectDrawableWithShadow extends Drawable {
     }
 
     static float calculateVerticalPadding(float maxShadowSize, float cornerRadius,
-            boolean addPaddingForCorners) {
+                                          boolean addPaddingForCorners) {
         if (addPaddingForCorners) {
             return (float) (maxShadowSize * SHADOW_MULTIPLIER + (1 - COS_45) * cornerRadius);
         } else {
@@ -184,7 +200,7 @@ class RoundRectDrawableWithShadow extends Drawable {
     }
 
     static float calculateHorizontalPadding(float maxShadowSize, float cornerRadius,
-            boolean addPaddingForCorners) {
+                                            boolean addPaddingForCorners) {
         if (addPaddingForCorners) {
             return (float) (maxShadowSize + (1 - COS_45) * cornerRadius);
         } else {
@@ -311,8 +327,13 @@ class RoundRectDrawableWithShadow extends Drawable {
         mCornerShadowPath.arcTo(innerBounds, 270f, -90f, false);
         mCornerShadowPath.close();
         float startRatio = mCornerRadius / (mCornerRadius + mShadowSize);
+
+        // 获取当前状态下的阴影颜色
+        int starColor = mShadowStartColor.getColorForState(getState(), mShadowStartColor.getDefaultColor());
+        int endColor = mShadowEndColor.getColorForState(getState(), mShadowEndColor.getDefaultColor());
+
         mCornerShadowPaint.setShader(new RadialGradient(0, 0, mCornerRadius + mShadowSize,
-                new int[]{mShadowStartColor, mShadowStartColor, mShadowEndColor},
+                new int[]{starColor, starColor, endColor},
                 new float[]{0f, startRatio, 1f},
                 Shader.TileMode.CLAMP));
 
@@ -321,7 +342,7 @@ class RoundRectDrawableWithShadow extends Drawable {
         // When drawing bottom edge shadow, we use that extra space.
         mEdgeShadowPaint.setShader(new LinearGradient(0, -mCornerRadius + mShadowSize, 0,
                 -mCornerRadius - mShadowSize,
-                new int[]{mShadowStartColor, mShadowStartColor, mShadowEndColor},
+                new int[]{starColor, starColor, endColor},
                 new float[]{0f, .5f, 1f}, Shader.TileMode.CLAMP));
         mEdgeShadowPaint.setAntiAlias(false);
     }
@@ -368,7 +389,7 @@ class RoundRectDrawableWithShadow extends Drawable {
 
     float getMinHeight() {
         final float content = 2 * Math.max(mRawMaxShadowSize, mCornerRadius + mInsetShadow
-                        + mRawMaxShadowSize * SHADOW_MULTIPLIER / 2);
+                + mRawMaxShadowSize * SHADOW_MULTIPLIER / 2);
         return content + (mRawMaxShadowSize * SHADOW_MULTIPLIER + mInsetShadow) * 2;
     }
 

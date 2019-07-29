@@ -3,21 +3,43 @@
     <attr format="reference" name="cardViewStyle"/>
     <color name="cardview_dark_background">#FF424242</color>
     <color name="cardview_light_background">#FFFFFFFF</color>
-    <color name="cardview_shadow_end_color">#03000000</color>
-    <color name="cardview_shadow_start_color">#37000000</color>
-    <declare-styleable name="CardView">
-        <!-- Background color for CardView. -->
+    <color name="cardview_shadow_end_color">#ff0000</color>
+    <color name="cardview_shadow_start_color">#0000ff</color>
+    <declare-styleable name="MyCardView">
+
+        <attr name="cardShadowColorStart" format="color" />
+        <attr name="cardShadowColorEnd" format="color" />
+
+        <!-- Background color for CardView. 卡片背景颜色 -->
         <attr format="color" name="cardBackgroundColor"/>
-        <!-- Corner radius for CardView. -->
+        <!-- Corner radius for CardView.卡片圆角半径 -->
         <attr format="dimension" name="cardCornerRadius"/>
-        <!-- Elevation for CardView. -->
+        <!-- Elevation for CardView. 卡片阴影深度 -->
         <attr format="dimension" name="cardElevation"/>
-        <!-- Maximum Elevation for CardView. -->
+        <!-- Maximum Elevation for CardView. 卡片最大阴影深度 -->
         <attr format="dimension" name="cardMaxElevation"/>
+
         <!-- Add padding in API v21+ as well to have the same measurements with previous versions. -->
+        <!-- 在Android 5.0(api21)及以上平台中【高版本】，设置是否要添加padding，5.0以下默认添加padding。默认值为false
+                在Android 5.0及以下的系统中，CardView会添加一个额外的padding来绘制阴影，
+                但是在5.0以上的系统中是没有这个padding的，是直接绘制阴影。
+                所以设置这个属性仅仅是对5.0以上的CardView有作用。
+                设置为false的时CardView不会专门去添加padding来绘制阴影（5.0以上系统）。
+                设置为true时，5.0以上的CardView会和5.0以下的保持一致，添加padding后绘制阴影。
+        -->
         <attr format="boolean" name="cardUseCompatPadding"/>
+
         <!-- Add padding to CardView on v20 and before to prevent intersections between the Card content and rounded corners. -->
+        <!-- Android 4.4W(api 20)【低版本】是否给content添加padding，来阻止与圆角重叠，默认值为true
+                在5.0以下，CardView不会裁剪卡片的边界来获得圆角
+                同时，CardView会给卡片内容添加一个padding，来让内容不和圆角重叠。
+                可以设置app:cardPreventCornerOverlap属性来选择是否添加这个padding。
+                所以这个属性只在Android5.0以下起作用。
+                所以设置为true，也就是添加padding，使content不与圆角重叠。
+                设置为false，不添加padding，content与圆角重叠，圆角被覆盖。
+        -->
         <attr format="boolean" name="cardPreventCornerOverlap"/>
+
         <!-- Inner padding between the edges of the Card and children of the CardView. -->
         <attr format="dimension" name="contentPadding"/>
         <!-- Inner padding between the left edge of the Card and children of the CardView. -->

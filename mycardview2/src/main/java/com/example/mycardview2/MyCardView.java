@@ -75,7 +75,7 @@ import androidx.annotation.Px;
  * @attr ref androidx.cardview.R.styleable#CardView_contentPaddingRight
  * @attr ref androidx.cardview.R.styleable#CardView_contentPaddingBottom
  */
-public class CardView extends FrameLayout {
+public class MyCardView extends FrameLayout {
 
     private static final int[] COLOR_BACKGROUND_ATTR = {android.R.attr.colorBackground};
     private static final CardViewImpl IMPL;
@@ -108,22 +108,26 @@ public class CardView extends FrameLayout {
 
     final Rect mShadowBounds = new Rect();
 
-    public CardView(@NonNull Context context) {
+    public MyCardView(@NonNull Context context) {
         this(context, null);
     }
 
-    public CardView(@NonNull Context context, @Nullable AttributeSet attrs) {
+    public MyCardView(@NonNull Context context, @Nullable AttributeSet attrs) {
         this(context, attrs, R.attr.cardViewStyle);
     }
 
-    public CardView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public MyCardView(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CardView, defStyleAttr,
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.MyCardView, defStyleAttr,
                 R.style.CardView);
+
+        ColorStateList shadowColorStart = a.getColorStateList(R.styleable.MyCardView_cardShadowColorStart);
+        ColorStateList shadowColorEnd = a.getColorStateList(R.styleable.MyCardView_cardShadowColorEnd);
+
         ColorStateList backgroundColor;
-        if (a.hasValue(R.styleable.CardView_cardBackgroundColor)) {
-            backgroundColor = a.getColorStateList(R.styleable.CardView_cardBackgroundColor);
+        if (a.hasValue(R.styleable.MyCardView_cardBackgroundColor)) {
+            backgroundColor = a.getColorStateList(R.styleable.MyCardView_cardBackgroundColor);
         } else {
             // There isn't one set, so we'll compute one based on the theme
             final TypedArray aa = getContext().obtainStyledAttributes(COLOR_BACKGROUND_ATTR);
@@ -137,29 +141,29 @@ public class CardView extends FrameLayout {
                     ? getResources().getColor(R.color.cardview_light_background)
                     : getResources().getColor(R.color.cardview_dark_background));
         }
-        float radius = a.getDimension(R.styleable.CardView_cardCornerRadius, 0);
-        float elevation = a.getDimension(R.styleable.CardView_cardElevation, 0);
-        float maxElevation = a.getDimension(R.styleable.CardView_cardMaxElevation, 0);
-        mCompatPadding = a.getBoolean(R.styleable.CardView_cardUseCompatPadding, false);
-        mPreventCornerOverlap = a.getBoolean(R.styleable.CardView_cardPreventCornerOverlap, true);
-        int defaultPadding = a.getDimensionPixelSize(R.styleable.CardView_contentPadding, 0);
-        mContentPadding.left = a.getDimensionPixelSize(R.styleable.CardView_contentPaddingLeft,
+        float radius = a.getDimension(R.styleable.MyCardView_cardCornerRadius, 0);
+        float elevation = a.getDimension(R.styleable.MyCardView_cardElevation, 0);
+        float maxElevation = a.getDimension(R.styleable.MyCardView_cardMaxElevation, 0);
+        mCompatPadding = a.getBoolean(R.styleable.MyCardView_cardUseCompatPadding, false);
+        mPreventCornerOverlap = a.getBoolean(R.styleable.MyCardView_cardPreventCornerOverlap, true);
+        int defaultPadding = a.getDimensionPixelSize(R.styleable.MyCardView_contentPadding, 0);
+        mContentPadding.left = a.getDimensionPixelSize(R.styleable.MyCardView_contentPaddingLeft,
                 defaultPadding);
-        mContentPadding.top = a.getDimensionPixelSize(R.styleable.CardView_contentPaddingTop,
+        mContentPadding.top = a.getDimensionPixelSize(R.styleable.MyCardView_contentPaddingTop,
                 defaultPadding);
-        mContentPadding.right = a.getDimensionPixelSize(R.styleable.CardView_contentPaddingRight,
+        mContentPadding.right = a.getDimensionPixelSize(R.styleable.MyCardView_contentPaddingRight,
                 defaultPadding);
-        mContentPadding.bottom = a.getDimensionPixelSize(R.styleable.CardView_contentPaddingBottom,
+        mContentPadding.bottom = a.getDimensionPixelSize(R.styleable.MyCardView_contentPaddingBottom,
                 defaultPadding);
         if (elevation > maxElevation) {
             maxElevation = elevation;
         }
-        mUserSetMinWidth = a.getDimensionPixelSize(R.styleable.CardView_android_minWidth, 0);
-        mUserSetMinHeight = a.getDimensionPixelSize(R.styleable.CardView_android_minHeight, 0);
+        mUserSetMinWidth = a.getDimensionPixelSize(R.styleable.MyCardView_android_minWidth, 0);
+        mUserSetMinHeight = a.getDimensionPixelSize(R.styleable.MyCardView_android_minHeight, 0);
         a.recycle();
 
         IMPL.initialize(mCardViewDelegate, context, backgroundColor, radius,
-                elevation, maxElevation);
+                elevation, maxElevation, shadowColorStart, shadowColorEnd);
     }
 
     @Override
@@ -454,28 +458,28 @@ public class CardView extends FrameLayout {
 
         @Override
         public boolean getUseCompatPadding() {
-            return CardView.this.getUseCompatPadding();
+            return MyCardView.this.getUseCompatPadding();
         }
 
         @Override
         public boolean getPreventCornerOverlap() {
-            return CardView.this.getPreventCornerOverlap();
+            return MyCardView.this.getPreventCornerOverlap();
         }
 
         @Override
         public void setShadowPadding(int left, int top, int right, int bottom) {
             mShadowBounds.set(left, top, right, bottom);
-            CardView.super.setPadding(left + mContentPadding.left, top + mContentPadding.top,
+            MyCardView.super.setPadding(left + mContentPadding.left, top + mContentPadding.top,
                     right + mContentPadding.right, bottom + mContentPadding.bottom);
         }
 
         @Override
         public void setMinWidthHeightInternal(int width, int height) {
             if (width > mUserSetMinWidth) {
-                CardView.super.setMinimumWidth(width);
+                MyCardView.super.setMinimumWidth(width);
             }
             if (height > mUserSetMinHeight) {
-                CardView.super.setMinimumHeight(height);
+                MyCardView.super.setMinimumHeight(height);
             }
         }
 
@@ -486,7 +490,7 @@ public class CardView extends FrameLayout {
 
         @Override
         public View getCardView() {
-            return CardView.this;
+            return MyCardView.this;
         }
     };
 }

@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions' //扩展插件
+//apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions' //扩展插件
 
 android {
     compileSdkVersion 28
@@ -29,15 +29,13 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-    implementation 'io.github.meetsl:SCardView:1.1'
+//    implementation 'io.github.meetsl:SCardView:1.1'
     implementation 'com.google.android.material:material:1.0.0'
 
 
-    //kotlin 支持库
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-
-
-    implementation 'androidx.core:core-ktx:1.0.2'
+//    //kotlin 支持库
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//    implementation 'androidx.core:core-ktx:1.0.2'
 
     //androidx版本lifecycle
     implementation group: 'androidx.lifecycle', name: 'lifecycle-extensions', version: '2.0.0'
@@ -45,9 +43,11 @@ dependencies {
     implementation group: 'androidx.lifecycle', name: 'lifecycle-livedata', version: '2.0.0'
     implementation group: 'androidx.lifecycle', name: 'lifecycle-common', version: '2.0.0'
     implementation group: 'androidx.lifecycle', name: 'lifecycle-viewmodel', version: '2.0.0'
-    implementation group: 'androidx.lifecycle', name: 'lifecycle-common-java8', version: '2.0.0'
+//    implementation group: 'androidx.lifecycle', name: 'lifecycle-common-java8', version: '2.0.0'
     implementation group: 'androidx.lifecycle', name: 'lifecycle-viewmodel-ktx', version: '2.0.0'
     annotationProcessor group: 'androidx.lifecycle', name: 'lifecycle-compiler', version: '2.0.0'
+    implementation project(path: ':mycardview2')
+    implementation project(path: ':myscardview')
 
     //arch版本lifecycle
 //    implementation group: 'android.arch.lifecycle', name: 'extensions', version: '1.1.1'
