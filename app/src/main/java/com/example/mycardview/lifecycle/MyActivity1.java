@@ -22,7 +22,8 @@ public class MyActivity1 extends Activity implements LifecycleOwner {
 
         mLifecycle = (LifecycleRegistry) new LifecycleRegistry(this);
         mLifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START);
-        mLifecycle.markState(Lifecycle.State.STARTED);
+//        //或
+//        mLifecycle.markState(Lifecycle.State.STARTED);
 
         //监听
         getLifecycle().addObserver(new LifecycleObserver() {

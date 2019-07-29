@@ -185,6 +185,81 @@ class RoundRectDrawableWithShadow extends Drawable {
 而低于21时是通过Drawable来绘制阴影效果。
 
 
+# LifecycleOwner
+
+``` 
+LifecycleOwner (androidx.lifecycle)
+    LifecycleRegistryOwner (androidx.lifecycle)
+
+//实现LifecycleOwner的activity
+Context (android.content)
+    ContextWrapper (android.content)
+        ContextThemeWrapper (android.view)
+            Activity (android.app)
+                ComponentActivity (androidx.core.app)  implements LifecycleOwner
+                    FragmentActivity (androidx.fragment.app)
+                        AppCompatActivity (androidx.appcompat.app)
+
+//实现LifecycleOwner的fragment
+Fragment (androidx.fragment.app) implements LifecycleOwner
+    ListFragment (androidx.fragment.app)
+    DialogFragment (androidx.fragment.app)
+        AppCompatDialogFragment (androidx.appcompat.app)
+            BottomSheetDialogFragment (com.google.android.material.bottomsheet)
+
+```
+
+``` 
+public interface LifecycleOwner {
+    @NonNull
+    Lifecycle getLifecycle();
+}
+```
+LifecycleOwner接口（Lifecycle持有者）：
+
+实现该接口的类持有生命周期(Lifecycle对象)，
+该接口的生命周期(Lifecycle对象)的改变会被其注册的观察者LifecycleObserver观察到并触发其对应的事件。
+
+
+# 被观察者
+``` 
+Lifecycle (androidx.lifecycle)
+    LifecycleRegistry (androidx.lifecycle)
+```
+
+Lifecycle 是一个类，它持有关于组件（如 Activity 或 Fragment）生命周期状态的信息，并且允许其他对象观察此状态。
+
+Lifecycle(生命周期)：
+
+和LifecycleOwner不同的是，LifecycleOwner本身持有Lifecycle对象，
+LifecycleOwner通过其Lifecycle getLifecycle()的接口获取内部Lifecycle对象。
+
+
+Event(当前生命周期改变对应的事件)：当Lifecycle发生改变，如进入onCreate,会自动发出ON_CREATE事件。
+
+
+# 观察者：
+``` 
+LifecycleObserver (androidx.lifecycle)
+    FullLifecycleObserver (androidx.lifecycle)
+    GenericLifecycleObserver (androidx.lifecycle)
+        ReflectiveGenericLifecycleObserver (androidx.lifecycle)
+        SingleGeneratedAdapterObserver (androidx.lifecycle)
+        LifecycleBoundObserver in LiveData (androidx.lifecycle)
+        FullLifecycleObserverAdapter (androidx.lifecycle)
+        CompositeGeneratedAdaptersObserver (androidx.lifecycle)
+```
+LifecycleObserver接口（ Lifecycle观察者）：
+
+实现该接口的类，通过注解的方式，可以通过被LifecycleOwner类的addObserver(LifecycleObserver o)方法注册,
+被注册后，LifecycleObserver便可以观察到LifecycleOwner的生命周期事件。
+
+
+
+
+
+
+
 
 
 
