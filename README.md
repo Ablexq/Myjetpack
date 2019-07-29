@@ -132,6 +132,57 @@ WARNING: Debugging obsolete API calls can take time during configuration. It's r
 
 https://github.com/meetsl/SCardView-master
 
+# cardview阴影
+
+
+```
+CardViewImpl
+	CardViewApi21Impl 
+	CardViewBaseImpl 
+	    CardViewApi17Impl 
+```
+
+CardViewApi21Impl:
+
+```
+@Override
+public void setElevation(CardViewDelegate cardView, float elevation) {
+    cardView.getCardView().setElevation(elevation);
+}
+```
+
+CardViewBaseImpl:
+
+```
+@Override
+public void setElevation(CardViewDelegate cardView, float elevation) {
+    getShadowBackground(cardView).setShadowSize(elevation);
+}
+
+```
+RoundRectDrawableWithShadow : 
+``` 
+class RoundRectDrawableWithShadow extends Drawable {
+
+    mCornerShadowPaint.setShader(new RadialGradient(0, 0, mCornerRadius + mShadowSize,
+            new int[]{mShadowStartColor, mShadowStartColor, mShadowEndColor},
+            new float[]{0f, startRatio, 1f},
+            Shader.TileMode.CLAMP));
+    
+    // we offset the content shadowSize/2 pixels up to make it more realistic.
+    // this is why edge shadow shader has some extra space
+    // When drawing bottom edge shadow, we use that extra space.
+    mEdgeShadowPaint.setShader(new LinearGradient(0, -mCornerRadius + mShadowSize, 0,
+            -mCornerRadius - mShadowSize,
+            new int[]{mShadowStartColor, mShadowStartColor, mShadowEndColor},
+            new float[]{0f, .5f, 1f}, Shader.TileMode.CLAMP));
+    mEdgeShadowPaint.setAntiAlias(false);
+
+}
+
+```
+当 API 高于或等于21时，使用的是从API21开始才有的Elevation属性设置阴影效果的，
+而低于21时是通过Drawable来绘制阴影效果。
 
 
 
