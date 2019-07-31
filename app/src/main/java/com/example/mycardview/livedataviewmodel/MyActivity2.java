@@ -13,6 +13,8 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.mycardview.R;
 
+import java.util.Date;
+
 public class MyActivity2 extends FragmentActivity implements View.OnClickListener {
 
     private MyViewModel viewModel;
@@ -31,7 +33,8 @@ public class MyActivity2 extends FragmentActivity implements View.OnClickListene
             @Override
             public void onChanged(String s) {
                 System.out.println("s===============" + s);//实时监听
-                textView1.setText(s);
+                long time = new Date().getTime();
+                textView1.setText(time + " : " + s);
             }
         });
 
@@ -42,7 +45,8 @@ public class MyActivity2 extends FragmentActivity implements View.OnClickListene
                 String s = ((ObservableField<String>) sender).get();
                 System.out.println("sender================" + s);
                 System.out.println("propertyId============" + propertyId);
-                textView1.setText(s);
+                long time = new Date().getTime();
+                textView1.setText(time + " : " + s);
             }
         });
 
@@ -50,20 +54,22 @@ public class MyActivity2 extends FragmentActivity implements View.OnClickListene
 
     private void initViews() {
         textView1 = ((TextView) this.findViewById(R.id.tv_vm1));
-        findViewById(R.id.btn1).setOnClickListener(this);
-        findViewById(R.id.btn2).setOnClickListener(this);
-        findViewById(R.id.btn3).setOnClickListener(this);
-        findViewById(R.id.btn4).setOnClickListener(this);
+        findViewById(R.id.btn10).setOnClickListener(this);
+        findViewById(R.id.btn11).setOnClickListener(this);
+        findViewById(R.id.btn12).setOnClickListener(this);
+        findViewById(R.id.btn20).setOnClickListener(this);
+        findViewById(R.id.btn21).setOnClickListener(this);
+        findViewById(R.id.btn22).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn1:
+            case R.id.btn10:
                 //主线程
                 viewModel.getName().setValue("11111111111111");
                 break;
-            case R.id.btn2:
+            case R.id.btn11:
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
@@ -72,16 +78,24 @@ public class MyActivity2 extends FragmentActivity implements View.OnClickListene
                     }
                 }).start();
                 break;
-            case R.id.btn3:
+            case R.id.btn12:
+                //主线程
+                viewModel.getName().setValue("2222222222222222");
+                break;
+
+            case R.id.btn20:
                 observableUser.name.set("333333333333333");
                 break;
-            case R.id.btn4:
+            case R.id.btn21:
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
                         observableUser.name.set("44444444");
                     }
                 }).start();
+                break;
+            case R.id.btn22:
+                observableUser.name.set("44444444");
                 break;
         }
     }

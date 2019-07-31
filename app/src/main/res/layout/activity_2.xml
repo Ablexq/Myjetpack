@@ -5,32 +5,46 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/btn1"
+        android:id="@+id/btn10"
         android:layout_width="match_parent"
         android:layout_height="66dp"
         android:layout_margin="20dp"
         android:text="livedata setValue 主线程" />
 
     <Button
-        android:id="@+id/btn2"
+        android:id="@+id/btn11"
         android:layout_width="match_parent"
         android:layout_height="66dp"
         android:layout_margin="20dp"
         android:text="livedata postValue 子线程" />
 
     <Button
-        android:id="@+id/btn3"
+        android:id="@+id/btn12"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_margin="20dp"
+        android:text="livedata 发送同样数据" />
+
+    <Button
+        android:id="@+id/btn20"
         android:layout_width="match_parent"
         android:layout_height="66dp"
         android:layout_margin="20dp"
         android:text="ObservableField 主线程" />
 
     <Button
-        android:id="@+id/btn4"
+        android:id="@+id/btn21"
         android:layout_width="match_parent"
         android:layout_height="66dp"
         android:layout_margin="20dp"
         android:text="ObservableField 子线程" />
+
+    <Button
+        android:id="@+id/btn22"
+        android:layout_width="match_parent"
+        android:layout_height="66dp"
+        android:layout_margin="20dp"
+        android:text="ObservableField 发送相同数据" />
 
     <TextView
         android:id="@+id/tv_vm1"
