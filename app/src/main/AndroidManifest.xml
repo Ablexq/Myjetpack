@@ -21,12 +21,15 @@
         </activity>
 
         <activity android:name=".lifecycle.MyActivity1">
+
+        </activity>
+
+        <activity android:name=".livedataviewmodel.MyActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 
