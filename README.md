@@ -255,8 +255,83 @@ LifecycleObserver接口（ Lifecycle观察者）：
 被注册后，LifecycleObserver便可以观察到LifecycleOwner的生命周期事件。
 
 
+# activity 与 OnLifecycleEvent 周期
 
+``` 
+Activity======onCreate================================
+LifecycleObserver======onCreate========
+LifecycleObserver======onAny========
+LifecycleObserver======onStart========
+LifecycleObserver======onAny========
+Activity======onStart=================================
+LifecycleObserver======onResume========
+LifecycleObserver======onAny========
+Activity======onResume===============================
+LifecycleObserver======onPause========
+LifecycleObserver======onAny========
+Activity======onPause==================================
+LifecycleObserver======onStop========
+LifecycleObserver======onAny========
+Activity======onStop================================
+LifecycleObserver======onDestroy========
+LifecycleObserver======onAny========
+Activity======onDestroy=============================
+```
 
+``` 
+public enum State {
+    /**
+     * Destroyed state for a LifecycleOwner. After this event, this Lifecycle will not dispatch
+     * any more events. For instance, for an {@link android.app.Activity}, this state is reached
+     * <b>right before</b> Activity's {@link android.app.Activity#onDestroy() onDestroy} call.
+     */
+    DESTROYED,
+
+    /**
+     * Initialized state for a LifecycleOwner. For an {@link android.app.Activity}, this is
+     * the state when it is constructed but has not received
+     * {@link android.app.Activity#onCreate(android.os.Bundle) onCreate} yet.
+     */
+    INITIALIZED,
+
+    /**
+     * Created state for a LifecycleOwner. For an {@link android.app.Activity}, this state
+     * is reached in two cases:
+     * <ul>
+     *     <li>after {@link android.app.Activity#onCreate(android.os.Bundle) onCreate} call;
+     *     <li><b>right before</b> {@link android.app.Activity#onStop() onStop} call.
+     * </ul>
+     */
+    CREATED,
+
+    /**
+     * Started state for a LifecycleOwner. For an {@link android.app.Activity}, this state
+     * is reached in two cases:
+     * <ul>
+     *     <li>after {@link android.app.Activity#onStart() onStart} call;
+     *     <li><b>right before</b> {@link android.app.Activity#onPause() onPause} call.
+     * </ul>
+     */
+    STARTED,
+
+    /**
+     * Resumed state for a LifecycleOwner. For an {@link android.app.Activity}, this state
+     * is reached after {@link android.app.Activity#onResume() onResume} is called.
+     */
+    RESUMED;
+
+    /**
+     * Compares if this State is greater or equal to the given {@code state}.
+     *
+     * @param state State to compare with
+     * @return true if this State is greater or equal to the given {@code state}
+     */
+    public boolean isAtLeast(@NonNull State state) {
+        return compareTo(state) >= 0;
+    }
+}
+
+```
 
 
 

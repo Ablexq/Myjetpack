@@ -19,38 +19,53 @@ public class MyActivity1 extends Activity implements LifecycleOwner {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("Activity======onCreate========");
 
         mLifecycle = (LifecycleRegistry) new LifecycleRegistry(this);
-        mLifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START);
+        mLifecycle.handleLifecycleEvent(Lifecycle.Event.ON_CREATE);
 //        //或
-//        mLifecycle.markState(Lifecycle.State.STARTED);
+//        mLifecycle.markState(Lifecycle.State.CREATED);
 
         //监听
-        getLifecycle().addObserver(new LifecycleObserver() {
-
-            @OnLifecycleEvent(Lifecycle.Event.ON_CREATE)
-            private void onCreate() {
-                System.out.println("======onCreate========");
-            }
-        });
+        getLifecycle().addObserver(new MyLifecycleObserver());
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        mLifecycle.markState(Lifecycle.State.STARTED); //start - pause
+        mLifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START);
+//        mLifecycle.markState(Lifecycle.State.STARTED);
+        System.out.println("Activity======onStart========");
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        mLifecycle.markState(Lifecycle.State.RESUMED);  //resume
+        mLifecycle.handleLifecycleEvent(Lifecycle.Event.ON_RESUME);
+//        mLifecycle.markState(Lifecycle.State.RESUMED);
+        System.out.println("Activity======onResume========");
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mLifecycle.handleLifecycleEvent(Lifecycle.Event.ON_PAUSE);
+        System.out.println("Activity======onPause========");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mLifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP);
+        System.out.println("Activity======onStop========");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mLifecycle.markState(Lifecycle.State.DESTROYED); //destroy
+        mLifecycle.handleLifecycleEvent(Lifecycle.Event.ON_DESTROY);
+//        mLifecycle.markState(Lifecycle.State.DESTROYED);
+        System.out.println("Activity======onDestroy========");
     }
 
     @NonNull
