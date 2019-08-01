@@ -12,7 +12,46 @@ UI都会收到通知，不管数据有无变化 ， LiveData支持多线程
 
 •LiveData能感知Activity的生命周期，在Activity不活动的时候不会触发，例如一个Activity不在任务栈顶部
 
+# BaseObservable
 
+``` 
+BaseObservable (androidx.databinding)
+    BaseObservableField (androidx.databinding)
+        ObservableDouble (androidx.databinding)
+        ObservableChar (androidx.databinding)
+        ObservableByte (androidx.databinding)
+        ObservableField (androidx.databinding)
+            ObservableParcelable (androidx.databinding)
+        ObservableBoolean (androidx.databinding)
+        ObservableInt (androidx.databinding)
+        ObservableFloat (androidx.databinding)
+        ObservableShort (androidx.databinding)
+        ObservableLong (androidx.databinding)
+    ViewDataBinding (androidx.databinding)
+```
+
+``` 
+public class BaseObservableUser extends BaseObservable {
+
+    private String name;
+
+    @Bindable   //get方法上添加@Bindable
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+        notifyPropertyChanged(BR.name); //编译之后生成BR文件
+    }
+}
+```
+
+``` 
+public class ObservableUser {
+    public final ObservableField<String> name = new ObservableField<>();
+}
+```
 
 
 # LifecycleOwner

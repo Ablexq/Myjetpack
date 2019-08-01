@@ -20,6 +20,7 @@ public class MyActivity2 extends FragmentActivity implements View.OnClickListene
     private MyViewModel viewModel;
     private TextView textView1;
     private ObservableUser observableUser;
+    private BaseObservableUser baseObservableUser;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +51,15 @@ public class MyActivity2 extends FragmentActivity implements View.OnClickListene
             }
         });
 
+        baseObservableUser = new BaseObservableUser();
+        baseObservableUser.addOnPropertyChangedCallback(new Observable.OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable sender, int propertyId) {
+                String name = ((BaseObservableUser) sender).getName();
+                long time = new Date().getTime();
+                textView1.setText(time + " : " + name);
+            }
+        });
     }
 
     private void initViews() {
@@ -60,6 +70,9 @@ public class MyActivity2 extends FragmentActivity implements View.OnClickListene
         findViewById(R.id.btn20).setOnClickListener(this);
         findViewById(R.id.btn21).setOnClickListener(this);
         findViewById(R.id.btn22).setOnClickListener(this);
+        findViewById(R.id.btn30).setOnClickListener(this);
+        findViewById(R.id.btn31).setOnClickListener(this);
+        findViewById(R.id.btn32).setOnClickListener(this);
     }
 
     @Override
@@ -83,6 +96,7 @@ public class MyActivity2 extends FragmentActivity implements View.OnClickListene
                 viewModel.getName().setValue("2222222222222222");
                 break;
 
+            /*======================================================================*/
             case R.id.btn20:
                 observableUser.name.set("333333333333333");
                 break;
@@ -96,6 +110,22 @@ public class MyActivity2 extends FragmentActivity implements View.OnClickListene
                 break;
             case R.id.btn22:
                 observableUser.name.set("44444444");
+                break;
+
+            /*======================================================================*/
+            case R.id.btn30:
+                baseObservableUser.setName("5555555555555555");
+                break;
+            case R.id.btn31:
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        baseObservableUser.setName("6666666666666666");
+                    }
+                }).start();
+                break;
+            case R.id.btn32:
+                baseObservableUser.setName("6666666666666666");
                 break;
         }
     }
