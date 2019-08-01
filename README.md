@@ -373,7 +373,10 @@ public enum State {
 ```
 
 
-
+This navigation graph is not referenced from any layout files 
+(expected to find it in at least one layout file with a NavHostFragment with app:navGraph="@navigation/nav_graph" attribute). 
+Navigation resource files must be referenced from a NavHostFragment in a layout in order to be relevant.  
+Issue id: UnusedNavigation
 
 
 

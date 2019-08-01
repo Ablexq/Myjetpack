@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'kotlin-android'
-//apply plugin: 'kotlin-android-extensions' //扩展插件
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions' //扩展插件
 
 android {
     compileSdkVersion 28
@@ -37,9 +37,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.0.0'
 
 
-//    //kotlin 支持库
-//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-//    implementation 'androidx.core:core-ktx:1.0.2'
+    //kotlin 支持库
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.0.2'
 
     //androidx版本lifecycle
     implementation group: 'androidx.lifecycle', name: 'lifecycle-extensions', version: '2.0.0'
@@ -52,6 +52,10 @@ dependencies {
     annotationProcessor group: 'androidx.lifecycle', name: 'lifecycle-compiler', version: '2.0.0'
     implementation project(path: ':mycardview2')
     implementation project(path: ':myscardview')
+
+    implementation 'android.arch.navigation:navigation-fragment:1.0.0'
+    implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
+    implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
 
     //arch版本lifecycle
 //    implementation group: 'android.arch.lifecycle', name: 'extensions', version: '1.1.1'

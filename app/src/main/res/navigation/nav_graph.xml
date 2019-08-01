@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/indexActivity">
+
+    <activity
+        android:id="@+id/indexActivity"
+        android:name="com.example.mycardview.IndexActivity"
+        android:label="IndexActivity" />
+    <activity
+        android:id="@+id/myActivity1"
+        android:name="com.example.mycardview.lifecycle.MyActivity1"
+        android:label="MyActivity1" />
+    <activity
+        android:id="@+id/cardViewActivity"
+        android:name="com.example.mycardview.cardview.CardViewActivity"
+        android:label="test_cardview"
+        tools:layout="@layout/test_cardview" />
+</navigation>

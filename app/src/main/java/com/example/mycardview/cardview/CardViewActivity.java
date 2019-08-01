@@ -1,9 +1,11 @@
-package com.example.mycardview;
+package com.example.mycardview.cardview;
 
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.mycardview.R;
 
 public class CardViewActivity extends AppCompatActivity {
 

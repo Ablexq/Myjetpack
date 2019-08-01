@@ -16,7 +16,7 @@
 
         </activity>
 
-        <activity android:name=".CardViewActivity">
+        <activity android:name=".cardview.CardViewActivity">
 
         </activity>
 
@@ -25,6 +25,10 @@
         </activity>
 
         <activity android:name=".livedataviewmodel.MyActivity2">
+
+        </activity>
+
+        <activity android:name=".IndexActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
