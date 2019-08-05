@@ -38,6 +38,12 @@ class DemoActivity2 : AppCompatActivity() {
         demo2Binding.bgColor2 = bgColor2
     }
 
+    //1.可以选择保持事件回调方法的签名一致：@{presenter.afterTextChanged}，
+    // 此时方法名可以不一样，但方法参数和返回值必须和原始的回调函数保持一致。
+    //2.可以引用不遵循默认签名的函数：@{()->presenter.onUserNameClick(userInfo)}，
+    // 这里用到了 Lambda 表达式，这样就可以不遵循默认的方法签名，将userInfo对象直接传回点击方法中。
+    // 此外，也可以使用方法引用 :: 的形式来进行事件绑定
+    //https://blog.csdn.net/xiaowu_zhu/article/details/91951474
     inner class Presenter {
         fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int): Unit {//必须带参数
             viewModel.shoutUp()
