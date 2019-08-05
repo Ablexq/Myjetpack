@@ -16,8 +16,12 @@
         <import type="android.graphics.Bitmap" />
 
         <variable
-            name="bgColor"
-            type="com.example.mycardview.databinding.model.BgColor" />
+            name="bgColor1"
+            type="com.example.mycardview.databinding.model.BgColor1" />
+
+        <variable
+            name="bgColor2"
+            type="com.example.mycardview.databinding.model.BgColor2" />
     </data>
 
     <LinearLayout
@@ -34,9 +38,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{String.valueOf(vm.info)}" />
+            android:text="@{vm.info}" />
         <!--此处将int转string-->
         <!--android.content.res.Resources$NotFoundException: String resource ID #0xc8-->
+        <!-- 或者BindingConversion 实现 intToString -->
 
         <!-- ================================================================ -->
         <Button
@@ -49,14 +54,14 @@
         <View
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="@{bgColor.isColor?@color/colorAccent:@color/colorPrimary}" />
+            android:background="@{bgColor2.showColor?@color/colorAccent:@color/colorPrimary}" />
 
         <!-- ================================================================ -->
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@{bgColor.isColor?@color/colorAccent:@color/colorPrimary}"
-            android:onClick="@{()->presenter.onClickListenerBinding(bgColor.isColor)}"
+            android:background="@{bgColor1.showColor?@color/colorPrimary:@color/colorAccent}"
+            android:onClick="@{()->presenter.onClickListenerBinding(bgColor2.showColor)}"
             android:text="点击按钮2" />
 
     </LinearLayout>
