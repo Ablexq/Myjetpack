@@ -12,21 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".activitylifecyclecallbacks.MainActivity">
-
-        </activity>
-
-        <activity android:name=".cardview.CardViewActivity">
-
-        </activity>
-
-        <activity android:name=".lifecycle.MyActivity1">
-
-        </activity>
-
-        <activity android:name=".livedataviewmodel.MyActivity2">
-
-        </activity>
+        <activity android:name=".activitylifecyclecallbacks.MainActivity"/>
+        <activity android:name=".cardview.CardViewActivity"/>
+        <activity android:name=".lifecycle.MyActivity1"/>
+        <activity android:name=".livedataviewmodel.MyActivity2"/>
+        <activity android:name=".databinding.view.DemoActivity1" />
+        <activity android:name=".databinding.view.DemoActivity2" />
+        <activity android:name=".databinding.view.DemoActivity3" />
 
         <activity android:name=".IndexActivity">
             <intent-filter>

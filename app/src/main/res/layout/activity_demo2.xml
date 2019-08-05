@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="vm"
+            type="com.example.mycardview.databinding.viewmodel.AnimalViewModel" />
+
+        <variable
+            name="presenter"
+            type="com.example.mycardview.databinding.view.DemoActivity2.Presenter" />
+
+        <import type="android.graphics.Bitmap" />
+
+        <variable
+            name="bgColor"
+            type="com.example.mycardview.databinding.model.BgColor" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="输入  :  "
+            android:onTextChanged="@{presenter::onTextChanged}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{String.valueOf(vm.info)}" />
+        <!--此处将int转string-->
+        <!--android.content.res.Resources$NotFoundException: String resource ID #0xc8-->
+
+        <!-- ================================================================ -->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@{vm.animal.hasEat ? @color/colorAccent : @color/colorPrimary}"
+            android:onClick="@{presenter::onClick}"
+            android:text="点击按钮1" />
+
+        <View
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@{bgColor.isColor?@color/colorAccent:@color/colorPrimary}" />
+
+        <!-- ================================================================ -->
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@{bgColor.isColor?@color/colorAccent:@color/colorPrimary}"
+            android:onClick="@{()->presenter.onClickListenerBinding(bgColor.isColor)}"
+            android:text="点击按钮2" />
+
+    </LinearLayout>
+</layout>

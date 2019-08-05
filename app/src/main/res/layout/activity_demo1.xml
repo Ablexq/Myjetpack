@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <import
+            alias="textUtils01"
+            type="android.text.TextUtils"/>
+
+        <import
+            alias="textUtils02"
+            type="android.text.TextUtils"/>
+
+        <variable
+            name="animal1"
+            type="com.example.mycardview.databinding.model.Animal" />
+
+        <variable
+            name="animal2"
+            type="com.example.mycardview.databinding.model.Animal" />
+
+        <variable
+            name="vm"
+            type="com.example.mycardview.databinding.viewmodel.AnimalViewModel" />
+
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="hello world" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{vm.info}" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->vm.shoutUp()}"
+            android:text="shout" />
+
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text='@{animal1.name+" - "+animal1.shoutCount}' />
+
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text='@{animal2.shoutCount+" = "+animal2.name}' />
+
+     <!-- ================================================================= -->
+
+
+
+
+    </LinearLayout>
+</layout>
