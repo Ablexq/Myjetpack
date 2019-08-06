@@ -9,6 +9,9 @@ import com.example.mycardview.cardview.CardViewActivity
 import com.example.mycardview.databinding.view.DemoActivity1
 import com.example.mycardview.databinding.view.DemoActivity2
 import com.example.mycardview.databinding.view.DemoActivity3
+import com.example.mycardview.databinding2.view.TestActivity1
+import com.example.mycardview.databinding2.view.TestActivity2
+import com.example.mycardview.databinding2.view.TestActivity3
 import com.example.mycardview.lifecycle.MyActivity1
 import com.example.mycardview.livedataviewmodel.MyActivity2
 import kotlinx.android.synthetic.main.activity_index.*
@@ -31,6 +34,10 @@ class IndexActivity : AppCompatActivity(), View.OnClickListener {
                 R.id.btn05 -> startActivity(Intent(IndexActivity@ this, DemoActivity1::class.java))
                 R.id.btn06 -> startActivity(Intent(IndexActivity@ this, DemoActivity2::class.java))
                 R.id.btn07 -> startActivity(Intent(IndexActivity@ this, DemoActivity3::class.java))
+
+                R.id.btn08 -> startActivity(Intent(IndexActivity@ this, TestActivity1::class.java))
+                R.id.btn09 -> startActivity(Intent(IndexActivity@ this, TestActivity2::class.java))
+                R.id.btn10 -> startActivity(Intent(IndexActivity@ this, TestActivity3::class.java))
                 else -> ""
             }
         }
@@ -48,5 +55,8 @@ class IndexActivity : AppCompatActivity(), View.OnClickListener {
         btn05.setOnClickListener(this)
         btn06.setOnClickListener(this)
         btn07.setOnClickListener(this)
+        btn08.setOnClickListener(this)
+        btn09.setOnClickListener(this)
+        btn10.setOnClickListener(this)
     }
 }

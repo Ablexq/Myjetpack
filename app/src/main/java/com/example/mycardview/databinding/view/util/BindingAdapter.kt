@@ -28,12 +28,12 @@ import android.widget.TextView
 * */
 object BindingAdapter {
 
-    //BindingAdapter 和 BindingConversion 同时生效，而 BindingConversion 的优先级要高些
-    @JvmStatic
-    @BindingAdapter("android:text")
-    fun setText(view: TextView, text: String) {
-        view.text = "$text-BindingAdapter"
-    }
+//    //BindingAdapter 和 BindingConversion 同时生效，而 BindingConversion 的优先级要高些
+//    @JvmStatic
+//    @BindingAdapter("android:text")
+//    fun setText(view: TextView, text: String) {
+//        view.text = "$text-BindingAdapter"
+//    }
 
     @JvmStatic
     @BindingAdapter("app:imageUrl")

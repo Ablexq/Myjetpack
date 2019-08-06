@@ -379,6 +379,119 @@ Navigation resource files must be referenced from a NavHostFragment in a layout 
 Issue id: UnusedNavigation
 
 
+单向数据绑定
+
+实现数据变化自动驱动UI刷新的方式有三种：BaseObservable，ObservableField，ObservableCollection
+
+BaseObservable
+
+一个纯净的ViewModel类被更新后，并不会让UI自动更新。
+而数据绑定后，我们自然会希望数据变更后UI会即时刷新，Observable就是为此而生的概念。
+BaseObservable提供了notifyChange（）和notifyPropertyChanged（）两个方法，
+前者会刷新所有的值域，后者则只更新对应的BR的标志，该BR的生成通过注释@Bindable生成，
+可以通过BR notify特定属性关联的视图
+
+``` 
+package androidx.databinding;
+
+import androidx.annotation.NonNull;
+
+public class BaseObservable implements Observable {
+    private transient PropertyChangeRegistry mCallbacks;
+
+    public BaseObservable() {
+    }
+
+    /**
+     * 用于监听属性变化
+     */
+    @Override
+    public void addOnPropertyChangedCallback(@NonNull OnPropertyChangedCallback callback) {
+        synchronized (this) {
+            if (mCallbacks == null) {
+                mCallbacks = new PropertyChangeRegistry();
+            }
+        }
+        mCallbacks.add(callback);
+    }
+
+    @Override
+    public void removeOnPropertyChangedCallback(@NonNull OnPropertyChangedCallback callback) {
+        synchronized (this) {
+            if (mCallbacks == null) {
+                return;
+            }
+        }
+        mCallbacks.remove(callback);
+    }
+
+    /**
+     * Notifies listeners that all properties of this instance have changed.
+     * 通知侦听器此实例的所有属性都已更改。
+     */
+    public void notifyChange() {
+        synchronized (this) {
+            if (mCallbacks == null) {
+                return;
+            }
+        }
+        mCallbacks.notifyCallbacks(this, 0, null);
+    }
+
+    /**
+     * Notifies listeners that a specific property has changed. 
+     * 通知侦听器特定属性已更改。
+     * The getter for the property that changes should be marked with {@link Bindable} to generate a field in
+     * <code>BR</code> to be used as <code>fieldId</code>.
+     * get方法上添加@Bindable注解，build后生成BR（项目包名+BR）文件中可获取fieldId用于该方法的参数
+     * @param fieldId The generated BR id for the Bindable field.
+     */
+    public void notifyPropertyChanged(int fieldId) {
+        synchronized (this) {
+            if (mCallbacks == null) {
+                return;
+            }
+        }
+        mCallbacks.notifyCallbacks(this, fieldId, null);
+    }
+}
+```
+
+示例：
+
+``` 
+public class BaseObservableUser extends BaseObservable {
+
+    private String name;
+
+    @Bindable   //get方法上添加@Bindable
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+        notifyPropertyChanged(BR.name); //编译之后生成BR文件
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

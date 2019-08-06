@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="com.example.mycardview.databinding2.model.Goods" />
+
+        <import type="com.example.mycardview.databinding2.view.TestActivity2.GoodsHandler" />
+
+        <variable
+            name="goods"
+            type="Goods" />
+
+        <variable
+            name="goodsHandler"
+            type="GoodsHandler" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:text="@{goods.name}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:text="@{goods.details}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:text="@{String.valueOf(goods.price)}" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:onClick="@{()->goodsHandler.changeGoodsName()}"
+            android:text="改变指定属性"
+            android:textAllCaps="false" />
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:onClick="@{()->goodsHandler.changeGoodsDetails()}"
+            android:text="改变全部"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
+</layout>

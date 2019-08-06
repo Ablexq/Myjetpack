@@ -53,9 +53,9 @@ object BindingConversion {
     @BindingConversion
     fun listToString(value: List<String>?) = value?.joinToString()
 
-    @JvmStatic
-    @BindingConversion
-    fun conversionString(text: String): String {
-        return "$text-BindingConversion"
-    }
+//    @JvmStatic
+//    @BindingConversion
+//    fun conversionString(text: String): String {
+//        return "$text-BindingConversion"
+//    }
 }
