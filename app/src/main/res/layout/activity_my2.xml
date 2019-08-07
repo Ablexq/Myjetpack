@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.example.mycardview.databinding3.view.My2Activity" />
+
+        <variable
+            name="presenter"
+            type="com.example.mycardview.databinding3.view.My2Activity.Presenter" />
+    </data>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:itemLayout="@{@layout/activity_my2_item}"
+        app:items="@{activity.showDatas}"
+        app:layoutManager="@string/linear_layout_manager"
+        app:onBindItem="@{presenter.onBindItem}" />
+</layout>

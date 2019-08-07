@@ -1,4 +1,19 @@
 
+# DataBinding
+
+[leavesC/DataBindingSamples](https://github.com/leavesC/DataBindingSamples)
+
+[DataBinding实用指南](https://www.jianshu.com/p/015ad08c2c75)
+
+``` 
+android:onClick="@{presenter.onClick()}" //1.方法引用
+android:onClick="@{()->presenter.onClick()}" //2.lamda表达式
+android:onClick="@{(view)->presenter.onClick(view)}" //3.lamda表达式
+android:onClick="@{()->presenter.onClick(item)}"//4.带参数lamda表达式
+android:onClick="@{(view)->presenter.onClick(view, item)}"//5.带参数lamda表达式
+```
+
+
 # ActivityLifecycleCallbacks
 
 # LiveData与 ObservableField的区别 

@@ -70,6 +70,7 @@ dependencies {
     implementation 'android.arch.navigation:navigation-fragment:1.0.0'
     implementation "android.arch.navigation:navigation-fragment-ktx:1.0.0"
     implementation "android.arch.navigation:navigation-ui-ktx:1.0.0"
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-beta01'
 
     //arch版本lifecycle
 //    implementation group: 'android.arch.lifecycle', name: 'extensions', version: '1.1.1'

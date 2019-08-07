@@ -64,4 +64,22 @@
         android:layout_height="wrap_content"
         android:text="测试10" />
 
+    <Button
+        android:id="@+id/btn11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试11" />
+
+    <Button
+        android:id="@+id/btn12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试12" />
+
+    <Button
+        android:id="@+id/btn13"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="测试13" />
+
 </LinearLayout>

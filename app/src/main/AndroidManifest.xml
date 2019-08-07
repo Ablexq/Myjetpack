@@ -32,6 +32,9 @@
         <activity android:name=".databinding2.view.TestActivity1" />
         <activity android:name=".databinding2.view.TestActivity2" />
         <activity android:name=".databinding2.view.TestActivity3" />
+        <activity android:name=".databinding3.view.My1Activity" />
+        <activity android:name=".databinding3.view.My2Activity" />
+        <activity android:name=".databinding3.view.My3Activity" />
     </application>
 
 </manifest>

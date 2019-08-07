@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="com.example.mycardview.databinding3.utils.StringUtils" />
+        <variable
+            name="user"
+            type="com.example.mycardview.databinding3.model.User" />
+
+        <variable
+            name="presenter"
+            type="com.example.mycardview.databinding3.view.My1Activity.My1Presenter" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:onClick="@{()->presenter.onClick(user)}"
+            android:padding="20dp"
+            android:text="@{user.name}" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:onClick="@{()->presenter.onClick(user)}"
+            android:padding="20dp"
+            android:text="@{user.age}" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:afterTextChanged="@{presenter.afterTextChanged}"
+            android:hint="用户名"
+            android:inputType="text"
+            android:text="@{StringUtils.toUpperCase(user.name)}" />
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_100"
+            android:afterTextChanged="@{presenter.afterUserAge}"
+            android:hint="年纪"
+            android:inputType="text" />
+
+    </LinearLayout>
+</layout>

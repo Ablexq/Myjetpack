@@ -1,4 +1,4 @@
-package com.example.mycardview.databinding.view.util;
+package com.example.mycardview.databinding.util;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;

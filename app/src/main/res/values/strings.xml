@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">MyCardView</string>
     <string name="url">https://csdnimg.cn/pubfooter/images/edu-QR.png</string>
+
+    <string name="linear_layout_manager">androidx.recyclerview.widget.LinearLayoutManager</string>
+    <string name="grid_layout_manager">androidx.recyclerview.widget.GridLayoutManager</string>
 </resources>
